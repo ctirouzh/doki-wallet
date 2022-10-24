@@ -34,10 +34,3 @@ about this procedure)
 - We need a daily job to calculate total amount of transactions and print it on terminal
 - You don’t have to develop any API or service for user, just develop the necessary
 services which are related to **wallet**
-
-## **Tasks:**
-
-- [x] Init folder structure: [65d9ea3](https://github.com/ctirouzh/doki-wallet/commit/65d9ea3824b538ded6329ca234839309cf6bcb8c)
-- [x] Write protocol buffer messages and generate grpc codes: [9973863](https://github.com/ctirouzh/doki-wallet/commit/9973863ac7454f0665b5787f5fbef56843565036)
-- [X] database connection: [47f87ff](https://github.com/ctirouzh/doki-wallet/commit/47f87ff35ef45526c815d35d782be7557f9099d3)
-- [x] Dockerize the microservice [3c97f4a](https://github.com/ctirouzh/doki-wallet/commit/3c97f4a13a250f3f828e7d05247e9a3a257399e0)
