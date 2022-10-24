@@ -7,6 +7,7 @@ This API should return a JSON to show the current balance of a user. The paramet
 needed for this API is user_id and the output should be like the below sample:
 >
 > Input: user_id int
+> 
 > Output: {"balance":4000}
 >
 - **add-money:**
@@ -15,6 +16,7 @@ number. The parameter which is needed for this API is user_id and amount and the
 be like the below sample:
 >
 > Input: user_id int amount int (this parameter can be negative)
+> 
 > Output: {"reference_id":12312312312}
 > 
 
