@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package docki.wallet;
+
+option go_package = "./grpc";
+
+message GetBalanceRequest {
+    int64 user_id = 1;
+}
+
+message GetBalanceResponse {
+    int64 balance = 1;
+}
+
+message AddMoneyRequest {
+    int64 user_id = 1;
+    int64 amount = 2;
+}
+
+message AddMoneyResponse {
+    int64 reference_id = 1;
+}
+
+service WalletService {
+    rpc GetBalance(GetBalanceRequest) returns (GetBalanceResponse) {};
+    rpc AddMoney(AddMoneyRequest) returns (AddMoneyResponse) {};
+
+}
