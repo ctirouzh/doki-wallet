@@ -38,6 +38,5 @@ services which are related to **wallet**
 ## **Tasks:**
 
 - [x] Init folder structure: [#1](https://github.com/ctirouzh/doki-wallet/commit/65d9ea3824b538ded6329ca234839309cf6bcb8c)
-- [ ] Write protocol buffer messages
-- [ ] Generate grpc codes
+- [x] Write protocol buffer messages and generate grpc codes: [#2](https://github.com/ctirouzh/doki-wallet/commit/9973863ac7454f0665b5787f5fbef56843565036)
 - [ ] Dockerize the microservice
