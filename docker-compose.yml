@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  app:
+    image: doki/wallet:latest
+    container_name: doki_wallet_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - api:/usr/src/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "50051:50051"
+    networks:
+      - dokiwallet  
+  db:
+    image: mysql:8.0.31
+    container_name: doki_wallet_db
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: "doki"
+      MYSQL_PASSWORD: "maywillAWAY"
+      MYSQL_DATABASE: "doki_wallet"
+    volumes:
+      - "mysqldata:/var/lib/mysql/data"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"  
+    networks:
+      - dokiwallet    
+
+volumes:
+  api: 
+  mysqldata:
+    driver: local
+
+networks:
+  dokiwallet:
+    # You can use a custom driver with special options (driver_opts)
+    driver: bridge

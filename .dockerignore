@@ -1,0 +1,9 @@
+*.swp
+*~
+.DS_Store
+.git/
+.gitignore
+.idea/
+.vscode/
+docker-compose.yml
+.env
