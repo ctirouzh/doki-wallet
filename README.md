@@ -34,3 +34,6 @@ about this procedure)
 - We need a daily job to calculate total amount of transactions and print it on terminal
 - You don’t have to develop any API or service for user, just develop the necessary
 services which are related to **wallet**
+
+## **Task Management**
+Please refer to [this](https://github.com/ctirouzh/doki-wallet/issues/1) issue to review the performed tasks. The commits for each task are listed in front of it.
