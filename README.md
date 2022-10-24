@@ -34,3 +34,10 @@ about this procedure)
 - We need a daily job to calculate total amount of transactions and print it on terminal
 - You don’t have to develop any API or service for user, just develop the necessary
 services which are related to **wallet**
+
+## **Tasks:**
+
+- [ ] Init folder structure
+- [ ] Write protocol buffer messages
+- [ ] Generate grpc codes
+- [ ] Dockerize the microservice
