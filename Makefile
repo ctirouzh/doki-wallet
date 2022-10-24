@@ -1,5 +1,5 @@
-clean:
-	rm -rf grpc/*
+clean-pb:
+	rm -rf pb/*
 
 .PHONY: server
 server:
@@ -11,7 +11,7 @@ client:
 
 .PHONY: proto
 proto:
-	protoc --go_out=grpc \
+	protoc --go_out=pb \
 	--go_opt=paths=source_relative \
-	--go-grpc_out=grpc --go-grpc_opt=paths=source_relative \
+	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
 	--proto_path=proto proto/*.proto

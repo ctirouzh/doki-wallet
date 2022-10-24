@@ -4,7 +4,7 @@
 // - protoc             v3.12.4
 // source: wallet_service.proto
 
-package grpc
+package pb
 
 import (
 	context "context"
