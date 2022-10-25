@@ -8,7 +8,7 @@ type Server struct {
 }
 
 func (server Server) Address() string {
-	return server.Host + ":" + server.Port
+	return "0.0.0.0:" + server.Port
 }
 
 type MySQL struct {

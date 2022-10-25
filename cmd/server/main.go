@@ -17,12 +17,11 @@ import (
 )
 
 func main() {
-	fmt.Println("[server]>>> Welcome!")
+	fmt.Println("[server]>>> Welcome to doki wallet microservice!")
 
 	fmt.Println("[server]>>> Parsing configs...")
 	cfg := config.Parse()
-
-	log.Println("config: ", cfg)
+	// log.Println("config: ", cfg)
 
 	fmt.Println("[server]>>> Connecting to database...")
 	database.ConnectMySQL(cfg.MySQL)
@@ -47,12 +46,12 @@ func main() {
 
 	listener, err := net.Listen("tcp", cfg.Server.Address())
 	if err != nil {
-		log.Fatal("cannot start server: ", err)
+		log.Fatal("[server]>>> cannot start server: ", err)
 	}
-	log.Printf("server started on port %s\n", cfg.Server.Port)
+	log.Printf("[server]>>> server started on port %s\n", cfg.Server.Port)
 
 	err = grpcServer.Serve(listener)
 	if err != nil {
-		log.Fatal("cannot start server: ", err)
+		log.Fatal("[server]>>>cannot start server: ", err)
 	}
 }
