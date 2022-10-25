@@ -1,9 +1,17 @@
 clean-pb:
 	rm -rf pb/*
 
-.PHONY: server
-server:
-	go run cmd/server/*.go -port 50051
+.PHONY: buildup
+buildup:
+	sudo docker-compose up --build -d
+
+.PHONY: stop
+stop:
+	sudo docker-compose stop
+
+.PHONY: down
+down:
+	sudo docker-compose down
 
 .PHONY: client
 client:
@@ -14,4 +22,4 @@ proto:
 	protoc --go_out=pb \
 	--go_opt=paths=source_relative \
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
-	--proto_path=proto proto/*.proto
+	--proto_path=internal/port/grpc/proto internal/port/grpc/proto/*.proto
