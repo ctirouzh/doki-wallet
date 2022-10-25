@@ -7,6 +7,10 @@ type Server struct {
 	Port string
 }
 
+func (server Server) Address() string {
+	return server.Host + ":" + server.Port
+}
+
 type MySQL struct {
 	Host string //DB Host
 	Port string //DB Port
