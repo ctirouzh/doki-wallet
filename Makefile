@@ -3,19 +3,19 @@ clean-pb:
 
 .PHONY: buildup
 buildup:
-	sudo docker-compose up --build
+	docker-compose up --build
 
 .PHONY: stop
 stop:
-	sudo docker-compose stop
+	docker-compose stop
 
 .PHONY: up
 up:
-	sudo docker-compose up
+	docker-compose up
 
 .PHONY: down
 down:
-	sudo docker-compose down
+	docker-compose down
 
 .PHONY: client
 client:

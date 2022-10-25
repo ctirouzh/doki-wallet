@@ -28,13 +28,14 @@ func (api *WalletAPI) GetBalance(
 	ctx context.Context, req *pb.GetBalanceRequest,
 ) (*pb.GetBalanceResponse, error) {
 
-	log.Printf("[api]>>> received a register request with user_id: %d", req.UserId)
+	log.Printf("[api]>>> received a \"get balance\" request with user_id: %d", req.UserId)
 	// Check and log if context has Canceled or DeadLineExceeded error
 	if err := checkContextError(ctx); err != nil {
 		return nil, err
 	}
+
 	balance, err := api.walletService.GetBalance(uint(req.UserId))
-	log.Println("Balance: ", balance)
+	// log.Println("[api]>>> Balance: ", balance)
 	if err != nil {
 		switch err {
 		case domain.ErrWalletNotFound:
@@ -50,8 +51,22 @@ func (api *WalletAPI) AddMoney(
 	ctx context.Context, req *pb.AddMoneyRequest,
 ) (*pb.AddMoneyResponse, error) {
 
+	log.Printf("[api]>>> received a \"add money\" request with user_id: %d, amount: %d", req.UserId, req.Amount)
+	// Check and log if context has Canceled or DeadLineExceeded error
 	if err := checkContextError(ctx); err != nil {
 		return nil, err
 	}
-	return nil, status.Error(codes.Unimplemented, ErrApiNotImplemented.Error())
+
+	refrenceID, err := api.walletService.AddMoney(uint(req.UserId), req.Amount)
+	if err != nil {
+		switch err {
+		case domain.ErrWalletNotFound:
+			return nil, status.Error(codes.NotFound, domain.ErrWalletNotFound.Error())
+		case app.ErrNotEnoughBalance:
+			return nil, status.Error(codes.FailedPrecondition, app.ErrNotEnoughBalance.Error())
+		default:
+			return nil, status.Error(codes.Internal, ErrInternalServer.Error())
+		}
+	}
+	return &pb.AddMoneyResponse{ReferenceId: int64(refrenceID)}, nil
 }

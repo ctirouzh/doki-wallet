@@ -9,4 +9,5 @@ var (
 
 type WalletRepository interface {
 	Find(user_id uint) (*Wallet, error)
+	Update(id uint, balance Balance) error
 }

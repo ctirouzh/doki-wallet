@@ -25,3 +25,8 @@ func (repo *WalletRepo) Find(user_id uint) (*domain.Wallet, error) {
 	}
 	return wallet, nil
 }
+
+func (repo *WalletRepo) Update(id uint, balance domain.Balance) error {
+	return repo.db.Model(&domain.Wallet{}).
+		Where("id=?", id).Update("balance", balance).Error
+}

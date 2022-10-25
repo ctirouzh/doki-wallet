@@ -26,14 +26,16 @@ func main() {
 	fmt.Println("[server]>>> Connecting to database...")
 	database.ConnectMySQL(cfg.MySQL)
 	database.Migrate()
-	database.Seed(10)
+	if seedErr := database.Seed(10); seedErr != nil {
+		log.Fatal("[server]>>> failed to seed")
+	}
 	db := database.GetDB()
 
-	walletRepo := repository.NewWalletRepo(db)
-	walletService := app.NewWalletService(walletRepo)
-
 	transRepo := repository.NewTransactionRepo(db)
+	walletRepo := repository.NewWalletRepo(db)
+
 	transService := app.NewTransactionService(transRepo)
+	walletService := app.NewWalletService(walletRepo, transRepo)
 
 	walletAPI := api.NewWalletAPI(walletService, transService)
 

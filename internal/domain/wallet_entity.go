@@ -3,6 +3,7 @@ package domain
 import "time"
 
 type Balance int64
+
 type Wallet struct {
 	ID        uint    `gorm:"primaryKey"`
 	UserID    uint    `gorm:"uniqueIndex;not null"`
