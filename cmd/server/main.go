@@ -26,6 +26,7 @@ func main() {
 	fmt.Println("[server]>>> Connecting to database...")
 	database.ConnectMySQL(cfg.MySQL)
 	database.Migrate()
+	database.Seed(10)
 	db := database.GetDB()
 
 	walletRepo := repository.NewWalletRepo(db)

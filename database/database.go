@@ -1,6 +1,7 @@
 package database
 
 import (
+	"errors"
 	"log"
 
 	"doki/wallet/config"
@@ -64,4 +65,24 @@ func dropUnusedColumns(dst interface{}) {
 			DB.Migrator().DropColumn(dst, columns[i].Name())
 		}
 	}
+}
+
+// Seed adds n new wallet record with auto incremented user_id to the database.
+// It only seeds if wallets table has no record.
+func Seed(n int) error {
+	if DB.Migrator().HasTable(&domain.Wallet{}) {
+		if err := DB.First(&domain.Wallet{}).Error; errors.Is(err, gorm.ErrRecordNotFound) {
+			// Seed
+			for i := 1; i <= n; i++ {
+				wallet := domain.Wallet{
+					UserID:  uint(i),
+					Balance: domain.Balance(0),
+				}
+				if createErr := DB.Create(&wallet).Error; createErr != nil {
+					return createErr
+				}
+			}
+		}
+	}
+	return nil
 }

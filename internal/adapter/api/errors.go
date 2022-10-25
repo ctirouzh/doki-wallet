@@ -2,10 +2,16 @@ package api
 
 import (
 	"context"
+	"errors"
 	"log"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+)
+
+var (
+	ErrApiNotImplemented = errors.New("api not implemented")
+	ErrInternalServer    = errors.New("internal server error")
 )
 
 // logError logs an error, and returns nil in case of no error

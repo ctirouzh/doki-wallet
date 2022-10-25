@@ -17,7 +17,7 @@ services:
     ports:
       - "50051:50051"
     networks:
-      - dokiwallet  
+      - backend  
   db:
     image: mysql:8.0.31
     container_name: doki_wallet_db
@@ -35,7 +35,7 @@ services:
     expose:
       - "3306"  
     networks:
-      - dokiwallet    
+      - backend    
 
 volumes:
   api: 
@@ -43,6 +43,6 @@ volumes:
     driver: local
 
 networks:
-  dokiwallet:
+  backend:
     # You can use a custom driver with special options (driver_opts)
     driver: bridge

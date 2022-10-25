@@ -3,11 +3,15 @@ clean-pb:
 
 .PHONY: buildup
 buildup:
-	sudo docker-compose up --build -d
+	sudo docker-compose up --build
 
 .PHONY: stop
 stop:
 	sudo docker-compose stop
+
+.PHONY: up
+up:
+	sudo docker-compose up
 
 .PHONY: down
 down:

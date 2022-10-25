@@ -16,5 +16,12 @@ func NewWalletRepo(db *gorm.DB) *WalletRepo {
 }
 
 func (repo *WalletRepo) Find(user_id uint) (*domain.Wallet, error) {
-	return nil, errors.New("repository interface not implemented")
+	wallet := new(domain.Wallet)
+	if err := repo.db.Where("user_id=?", user_id).First(wallet).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, domain.ErrWalletNotFound
+		}
+		return nil, err
+	}
+	return wallet, nil
 }
