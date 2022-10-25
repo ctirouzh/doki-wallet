@@ -35,7 +35,7 @@ func Parse() *Config {
 		MySQL: MySQL{
 			Host: os.Getenv("DB_HOST"),
 			Port: os.Getenv("DB_PORT"),
-			Name: os.Getenv("DB_Name"),
+			Name: os.Getenv("DB_NAME"),
 			User: os.Getenv("DB_USER"),
 			Pass: os.Getenv("DB_PASS"),
 		},

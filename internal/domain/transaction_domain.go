@@ -22,10 +22,10 @@ func (status TransStatus) Index() int {
 }
 
 type Transaction struct {
-	ID        uint
-	WalletID  uint
-	Amount    int64
-	Status    TransStatus
+	ID        uint        `gorm:"primaryKey"`
+	WalletID  uint        `gorm:"uniqueIndex;not null"`
+	Amount    int64       `gorm:"not null"`
+	Status    TransStatus `gorm:"index;size:1;not null;default:0"`
 	CreatedAt time.Time
 	LockedAt  time.Time
 }

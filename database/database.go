@@ -4,6 +4,7 @@ import (
 	"log"
 
 	"doki/wallet/config"
+	"doki/wallet/internal/domain"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -30,7 +31,12 @@ func GetDB() *gorm.DB {
 // migrate calls Automigrate function for all models.
 // It also drops unused column internally.
 func Migrate() {
-	db_models := []interface{}{}
+	db_models := []interface{}{
+		&domain.Wallet{},
+		&domain.Transaction{},
+	}
+
+	log.Println("Current Database: ", DB.Migrator().CurrentDatabase())
 	for _, db_model := range db_models {
 		if err := DB.AutoMigrate(db_model); err != nil {
 			log.Fatal("[database]>>> failed to migrate: ", err)
