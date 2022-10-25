@@ -23,11 +23,13 @@ services:
     container_name: doki_wallet_db
     restart: unless-stopped
     environment:
-      MYSQL_USER: "doki"
-      MYSQL_PASSWORD: "maywillAWAY"
-      MYSQL_DATABASE: "doki_wallet"
+      MYSQL_ROOT_HOST: ${DB_HOST}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
     volumes:
-      - "mysqldata:/var/lib/mysql/data"
+      - "mysqldata:/var/lib/mysql"
     ports:
       - "3306:3306"
     expose:

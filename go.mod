@@ -3,7 +3,6 @@ module doki/wallet
 go 1.19
 
 require (
-	github.com/joho/godotenv v1.4.0
 	google.golang.org/grpc v1.50.1
 	google.golang.org/protobuf v1.28.1
 	gorm.io/driver/mysql v1.4.3
