@@ -21,11 +21,11 @@ func (s *TransactionService) DailyReport() {
 	log.Println("======================================")
 	log.Println("       Transaction Daily Report       ")
 	log.Println("======================================")
-	log.Printf(" >>> From: %s\n", from.Format("2006-01-02 15:04:05"))
-	log.Printf(" >>> From: %s\n", to.Format("2006-01-02 15:04:05"))
-	log.Printf(" >>> Total Transaction: %d\n", s.GetTransactionSum(from, to))
+	log.Printf(" >>>>>>> From Datatime: %s\n", from.Format("2006-01-02 15:04:05"))
+	log.Printf(" >>>>>>>>> To Datetime: %s\n", to.Format("2006-01-02 15:04:05"))
+	log.Printf(" >>> Total Transaction: %d\n", s.GetTotalTransaction(from, to))
 }
 
-func (s *TransactionService) GetTransactionSum(from, to time.Time) int64 {
+func (s *TransactionService) GetTotalTransaction(from, to time.Time) int64 {
 	return s.transRepo.Sum(from, to)
 }
