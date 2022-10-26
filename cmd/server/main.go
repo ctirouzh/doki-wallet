@@ -34,10 +34,10 @@ func main() {
 	transRepo := repository.NewTransactionRepo(db)
 	walletRepo := repository.NewWalletRepo(db)
 
-	transService := app.NewTransactionService(transRepo)
+	// transService := app.NewTransactionService(transRepo)
 	walletService := app.NewWalletService(walletRepo, transRepo)
 
-	walletAPI := api.NewWalletAPI(walletService, transService)
+	walletAPI := api.NewWalletAPI(walletService)
 
 	grpcServer := grpc.NewServer()
 

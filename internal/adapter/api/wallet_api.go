@@ -15,12 +15,11 @@ import (
 type WalletAPI struct {
 	pb.UnimplementedWalletServiceServer
 	walletService *app.WalletService
-	transService  *app.TransactionService
 }
 
 // NewWalletAPI is a factory which returns a pointer to a new WalletAPI struct.
-func NewWalletAPI(walletService *app.WalletService, transService *app.TransactionService) *WalletAPI {
-	return &WalletAPI{walletService: walletService, transService: transService}
+func NewWalletAPI(walletService *app.WalletService) *WalletAPI {
+	return &WalletAPI{walletService: walletService}
 }
 
 // GetBalance retrieves the wallet balance of the given user.
