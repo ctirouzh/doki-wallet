@@ -46,3 +46,12 @@ func (repo *TransactionRepo) Create(wallet_id uint, amount int64) (*domain.Trans
 func (repo *TransactionRepo) Update(id uint, status domain.TransStatus) (*domain.Transaction, error) {
 	return nil, ErrRepositoryMethodNotImplemented
 }
+
+func (repo *TransactionRepo) Sum(from, to time.Time) int64 {
+	var result int64
+	repo.db.Table("transactions").
+		Where("status=?", domain.TRANS_STATUS_DONE).
+		Where("created_at BETWEEN ? AND ?", from.String(), to.String()).
+		Select("sum(amount)").Row().Scan(&result)
+	return result
+}

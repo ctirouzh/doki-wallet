@@ -9,9 +9,11 @@ import (
 	"doki/wallet/pb"
 	"log"
 	"net"
+	"time"
 
 	"fmt"
 
+	"github.com/go-co-op/gocron"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -34,13 +36,15 @@ func main() {
 	transRepo := repository.NewTransactionRepo(db)
 	walletRepo := repository.NewWalletRepo(db)
 
-	// transService := app.NewTransactionService(transRepo)
+	transService := app.NewTransactionService(transRepo)
 	walletService := app.NewWalletService(walletRepo, transRepo)
 
 	walletAPI := api.NewWalletAPI(walletService)
 
-	grpcServer := grpc.NewServer()
+	// Daily job to calculate total amount of transactions and print it on terminal
+	runCronJobs(transService)
 
+	grpcServer := grpc.NewServer()
 	// Register All API servers
 	pb.RegisterWalletServiceServer(grpcServer, walletAPI)
 
@@ -57,4 +61,14 @@ func main() {
 	if err != nil {
 		log.Fatal("[server]>>>cannot start server: ", err)
 	}
+}
+
+func runCronJobs(transService *app.TransactionService) {
+	//Uncomment the At method in production environment
+	s := gocron.NewScheduler(time.UTC) //.At("23:59:59")
+	// s.Every(24).Hour().Do(func() { // Production environment
+	s.Every(30).Second().Do(func() { // Test environment
+		transService.DailyReport()
+	})
+	s.StartAsync()
 }

@@ -40,3 +40,8 @@ func (repo *mockWalletRepo) Update(id uint, balance domain.Balance) error {
 	repo.data[id] = wallet
 	return nil
 }
+
+func (repo *mockTransRepo) Sum(from, to time.Time) int64 {
+	var result int64
+	return result
+}
