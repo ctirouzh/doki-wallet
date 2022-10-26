@@ -1,6 +1,10 @@
 clean-pb:
 	rm -rf pb/*
 
+.PHONY: test
+test:
+	go test ./... -race -cover
+
 .PHONY: buildup
 buildup:
 	docker-compose up --build
