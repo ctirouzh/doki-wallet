@@ -12,6 +12,8 @@ import (
 var (
 	ErrApiNotImplemented = errors.New("api not implemented")
 	ErrInternalServer    = errors.New("internal server error")
+	ErrRequestIsCanceled = errors.New("request is canceled")
+	ErrDeadlineExceeded  = errors.New("deadline is exceeded")
 )
 
 // logError logs an error, and returns nil in case of no error
@@ -27,9 +29,9 @@ func logError(err error) error {
 func checkContextError(ctx context.Context) error {
 	switch ctx.Err() {
 	case context.Canceled:
-		return logError(status.Error(codes.Canceled, "request is canceled"))
+		return logError(status.Error(codes.Canceled, ErrRequestIsCanceled.Error()))
 	case context.DeadlineExceeded:
-		return logError(status.Error(codes.DeadlineExceeded, "deadline is exceeded"))
+		return logError(status.Error(codes.DeadlineExceeded, ErrDeadlineExceeded.Error()))
 	default:
 		return nil
 	}
